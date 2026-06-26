@@ -30,6 +30,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f0ec;height:100vh;heigh
 .menu-info{font-size:12px;color:#666;margin-top:4px;}
 .item-addr{font-size:11px;color:#6b6158;margin-top:5px;}
 .map-hint{font-size:10px;color:#bbb;margin-top:3px;}
+.discount-badge{display:inline-block;background:#e8534a;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:5px;vertical-align:middle;}
 .multi-result{display:flex;flex-direction:column;gap:7px;margin-top:4px;}
 .result-card{background:#fafaf6;border:1px solid #ebebE5;border-radius:10px;padding:9px 12px;cursor:pointer;transition:border-color 0.12s;}
 .result-card:hover{border-color:#6b6158;}
@@ -185,14 +186,14 @@ function showFloor(idx) {
 const FOOD = [
   {n:"㈜에렉스 카페테리아",cat:"한식",loc:"마곡나루역",price:8000,menu:"8,000",addr:"서울특별시 강서구 마곡중앙로 143 본동 지하1층"},
   {n:"오제제",cat:"일식",loc:"마곡코엑스",price:8000,menu:"등심 돈카츠 16,000 / 안심 돈카츠 17,000",addr:"서울특별시 강서구 마곡중앙로 143 지하2층"},
-  {n:"페이페이",cat:"아시안식",loc:"마곡코엑스",price:8000,menu:"양지 쌀국수 12,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층"},
+  {n:"페이페이",cat:"아시안식",loc:"마곡코엑스",price:8000,menu:"양지 쌀국수 12,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층",discount:true},
   {n:"제이스팟",cat:"아시안식",loc:"마곡동",price:8000,menu:"런치우삼겹훠궈 16,500",addr:"서울특별시 강서구 마곡중앙로 143 지하2층 208호"},
   {n:"어부몽",cat:"한식",loc:"마곡코엑스",price:8000,menu:"고등어구이 15,000 / 꼬막비빔밥·제육볶음 13,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층"},
-  {n:"정성순대",cat:"한식",loc:"마곡코엑스",price:8000,menu:"수제순대국 11,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층"},
-  {n:"고부대",cat:"한식",loc:"마곡코엑스",price:8000,menu:"미나리 부대찌개 13,000",addr:"서울특별시 강서구 마곡중앙로 143 지하2층"},
-  {n:"동원홈푸드 크리스피 프레시",cat:"샐러드/포케",loc:"마곡코엑스",price:8000,menu:"비프스테이크 샐러드 16,800",addr:"서울특별시 강서구 마곡중앙로143 르웨스트시티 지하2층"},
+  {n:"정성순대",cat:"한식",loc:"마곡코엑스",price:8000,menu:"수제순대국 11,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층",discount:true},
+  {n:"고부대",cat:"한식",loc:"마곡코엑스",price:8000,menu:"미나리 부대찌개 13,000",addr:"서울특별시 강서구 마곡중앙로 143 지하2층",discount:true},
+  {n:"크리스피 프레시",cat:"샐러드/포케",loc:"마곡코엑스",price:8000,menu:"비프스테이크 샐러드 16,800",addr:"서울특별시 강서구 마곡중앙로143 르웨스트시티 지하2층",discount:true},
   {n:"동원홈푸드 포르투세븐",cat:"양식",loc:"마곡코엑스",price:8000,menu:"씨푸드 스튜 파스타 21,800",addr:"서울특별시 강서구 마곡중앙로143 르웨스트시티 지하2층"},
-  {n:"상해루",cat:"중식",loc:"마곡코엑스",price:8000,menu:"유니 짜장면·짬뽕 10,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층"},
+  {n:"상해루",cat:"중식",loc:"마곡코엑스",price:8000,menu:"유니 짜장면·짬뽕 10,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층",discount:true},
   {n:"오근내10닭갈비",cat:"한식",loc:"마곡나루역",price:8000,menu:"닭갈비 16,000",addr:"서울특별시 강서구 마곡중앙로 143 본동 지하2층 230,231호"},
   {n:"흑토포케",cat:"샐러드/포케",loc:"마곡동",price:8000,menu:"-",addr:"서울특별시 강서구 마곡중앙로6로 42 1층 111호"},
   {n:"남원식당",cat:"한식",loc:"마곡동",price:8000,menu:"9,000",addr:"서울특별시 강서구 마곡서로 101 214,215,216호"},
@@ -256,14 +257,14 @@ const FOOD = [
   {n:"나루동태탕",cat:"한식",loc:"마곡나루역",price:8000,menu:"아구찜(小) 38,000",addr:"서울특별시 강서구 마곡중앙로 161-8 B동 210호"},
   {n:"동호정",cat:"한식",loc:"마곡동",price:8000,menu:"가정식백반(점심) 9,000 / 김치찌개 9,000",addr:"서울특별시 강서구 마곡중앙로 161-8 비동 101,102호"},
   {n:"본죽&비빔밥",cat:"한식",loc:"마곡나루역",price:8000,menu:"-",addr:"서울특별시 강서구 마곡중앙로 161-8 1층 A-105호"},
-  {n:"진진수라",cat:"한식",loc:"마곡코엑스",price:8000,menu:"(점심특선)갈비한상 45,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층"},
+  {n:"진진수라",cat:"한식",loc:"마곡코엑스",price:8000,menu:"(점심특선)갈비한상 45,000",addr:"서울특별시 강서구 마곡중앙로 143 지하 2층",discount:true},
   {n:"오봉집",cat:"한식",loc:"마곡나루역",price:8000,menu:"직화낙지볶음 12,000",addr:"서울특별시 강서구 마곡중앙5로 6 1층"},
   {n:"참이맛감자탕",cat:"한식",loc:"마곡나루역",price:8000,menu:"참이맛 감자탕(소) 33,000",addr:"서울특별시 강서구 마곡중앙로 161-17 1층 103-104호"},
-  {n:"고부대(마곡코엑스점)",cat:"한식",loc:"마곡코엑스",price:8000,menu:"미나리부대찌개 2인 SET 34,000",addr:"서울특별시 강서구 마곡중앙로 143 지하2층"},
-  {n:"브레디몽",cat:"카페/디저트",loc:"마곡코엑스",price:8000,menu:"리코타샐러드 10,300",addr:"서울특별시 강서구 마곡중앙로 143 본동 지하 2층 232호"},
+  {n:"고부대(마곡코엑스점)",cat:"한식",loc:"마곡코엑스",price:8000,menu:"미나리부대찌개 2인 SET 34,000",addr:"서울특별시 강서구 마곡중앙로 143 지하2층",discount:true},
+  {n:"브레디몽",cat:"카페/디저트",loc:"마곡코엑스",price:8000,menu:"리코타샐러드 10,300",addr:"서울특별시 강서구 마곡중앙로 143 본동 지하 2층 232호",discount:true},
   {n:"삼청당",cat:"한식",loc:"마곡코엑스",price:8000,menu:"삼청담김밥 5,500 / 한돈떡갈비김밥 6,900",addr:"서울특별시 강서구 마곡중앙로 111 지하2층 B235호"},
   {n:"소복집",cat:"한식",loc:"마곡동",price:8000,menu:"보리비빔밥 10,000 / 보쌈정식 11,000",addr:"서울특별시 강서구 마곡서로 158 1층 116호"},
-  {n:"침스버거",cat:"햄버거",loc:"마곡동",price:8000,menu:"침스버거 8,200 / 블루침스버거 8,800",addr:"서울특별시 강서구 마곡중앙로 143 본동 지하2층 211호"},
+  {n:"침스버거",cat:"햄버거",loc:"마곡동",price:8000,menu:"침스버거 8,200 / 블루침스버거 8,800",addr:"서울특별시 강서구 마곡중앙로 143 본동 지하2층 211호",discount:true},
   {n:"도니랑 김치생삼겹",cat:"한식",loc:"마곡동",price:8000,menu:"삼겹살(180g) 17,000 / 소불고기전골 11,000",addr:"서울특별시 강서구 마곡중앙5로 18 1층"},
   {n:"웨이",cat:"중식",loc:"마곡동",price:8000,menu:"wei 짜장면 7,000 / wei 짬뽕 9,000",addr:"서울특별시 강서구 마곡중앙5로 6 2층 218호"},
   {n:"팀홀튼",cat:"카페/디저트",loc:"마곡나루역",price:4500,menu:"-",addr:"서울특별시 강서구 마곡중앙로 143 르웨스트시티 A동 1층"},
@@ -303,11 +304,12 @@ function searchFood(q) {
   if(kw==='4,500원'||kw==='4500원'||kw==='4500') return FOOD.filter(d=>d.price===4500);
   if(kw==='5,000원'||kw==='5000원'||kw==='5000') return FOOD.filter(d=>d.price===5000);
   if(kw==='8,000원'||kw==='8000원'||kw==='8000') return FOOD.filter(d=>d.price===8000);
+  if(kw==='할인'||kw==='할인 가능'||kw==='할인가능'||kw.includes('할인')) return FOOD.filter(d=>d.discount);
   return FOOD.filter(d=>d.n.toLowerCase().includes(kw)||d.cat.toLowerCase().includes(kw)||d.loc.toLowerCase().includes(kw)||d.menu.toLowerCase().includes(kw));
 }
 function foodCard(d) {
   return `<div class="result-card" onclick="window.open('${naverUrl(d.n,d.addr)}','_blank')">
-    <div class="rest-name">${d.n}</div>
+    <div class="rest-name">${d.n}${d.discount?'<span class="discount-badge">💸 할인 가능</span>':''}</div>
     <span class="price-badge">식권 ${d.price.toLocaleString()}원</span><span class="cat-badge">${d.cat}</span>
     ${d.menu!=='-'?`<div class="menu-info">🍽 ${d.menu}</div>`:''}
     <div class="item-addr">📍 ${d.addr}</div>
@@ -380,12 +382,14 @@ function showWelcome(){
   const m=document.getElementById('msgs');
   const d=document.createElement('div');
   d.className='msg bot';
+  d.style.marginTop='auto';
   const catHtml='<div style="font-size:11px;color:#888;margin-top:10px;margin-bottom:4px;">🍽 카테고리</div><div class="chips">'+CATS.map(c=>'<span class="chip">'+c+'</span>').join('')+'</div>';
   const priceHtml='<div style="font-size:11px;color:#888;margin-top:10px;margin-bottom:4px;">💰 식권 금액</div><div class="chips">'+PRICE_CATS.map(p=>'<span class="chip price-chip">'+p+'</span>').join('')+'</div>';
-  d.innerHTML='<div class="bubble">안녕하세요!<br>마곡 소노트리니티항공 식권 리스트입니다!🍱<br><span style="font-size:11px;color:#aaa;">107개 · 식권 4,500~8,000원<br>· 카드 클릭 시 네이버 지도</span>'+catHtml+priceHtml+'</div>';
+  const discountHtml='<div style="font-size:11px;color:#888;margin-top:10px;margin-bottom:4px;">💸 할인</div><div class="chips"><span class="chip discount-chip" style="background:#fff0ef;border-color:#e8534a;color:#e8534a;">💸 할인 가능</span></div>';
+  d.innerHTML='<div class="bubble">안녕하세요!<br>마곡 소노트리니티항공 식권 리스트입니다!🍱<br><span style="font-size:11px;color:#aaa;">107개 · 식권 4,500~8,000원<br>· 카드 클릭 시 네이버 지도</span>'+catHtml+priceHtml+discountHtml+'</div>';
   m.appendChild(d);
-  m.scrollTop=m.scrollHeight;
-  d.querySelectorAll('.chip, .price-chip').forEach(chip=>chip.addEventListener('click',()=>{addMsg(chip.textContent,'user');setTimeout(()=>respond(chip.textContent),150);}));
+  m.scrollTop=0;
+  d.querySelectorAll('.chip, .price-chip, .discount-chip').forEach(chip=>chip.addEventListener('click',()=>{addMsg(chip.textContent,'user');setTimeout(()=>respond(chip.textContent),150);}));
 }
 
 function showBackBtn(){
